@@ -22,6 +22,7 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    public $password;
     /**
      * {@inheritdoc}
      */
@@ -66,5 +67,10 @@ class User extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
         ];
+    }
+    
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 }

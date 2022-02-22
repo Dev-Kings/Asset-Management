@@ -18,11 +18,10 @@ $this->title = 'My Yii Application';
                 <h2 class="display-6">Asset Management</h2>
 
                 <p class="lead"> Manage assets with ease:</p>
-                <ul class="lead">
+                
                     <li>Create users</li>
                     <li>Create Assets</li>
                     <li>Assign Assets to users</li>
-                </ul>
 
             </div>
             

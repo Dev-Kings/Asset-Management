@@ -3,10 +3,14 @@
 namespace frontend\controllers;
 
 use frontend\models\Assets;
+use backend\models\AssignAsset;
+use backend\models\AuthAssignment;
+use backend\models\AuthItem;
 use frontend\models\AssetsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * AssetsController implements the CRUD actions for Assets model.
@@ -56,6 +60,21 @@ class AssetsController extends Controller
     public function actionView($asset_id)
     {
         return $this->render('view', [
+            'model' => $this->findModel($asset_id),
+        ]);
+    }
+
+    /**
+     * Displays Assets assigned to user/staff model.
+     * @param int $asset_id Asset ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionShow()
+    {
+        $asset_id = Yii::$app->user->identity->username;
+        $asset_name;
+        return $this->render('show', [
             'model' => $this->findModel($asset_id),
         ]);
     }

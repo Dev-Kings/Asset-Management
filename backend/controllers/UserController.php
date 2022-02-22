@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use frontend\models\SignupForm;
 use backend\models\User;
 use backend\models\UserSearch;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\filters\AccessControl;
+use backend\models\AuthItem;
 use Yii;
 
 /**
@@ -26,7 +28,7 @@ class UserController extends Controller
             [
                 'access' => [
                     'class' => AccessControl::classname(),
-                    'only' => ['create', 'update', 'delete'],
+                    'only' => ['create', 'update', 'delete', 'logout', 'signup'],
                     'rules' => [
                         [
                             'allow' => true,
@@ -34,6 +36,24 @@ class UserController extends Controller
                         ],
                     ]
                 ],
+                /*
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['logout', 'signup'],
+                    'rules' => [
+                        [
+                            'actions' => ['signup'],
+                            'allow' => true,
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'actions' => ['logout'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
+                */
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -78,7 +98,8 @@ class UserController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    /*
+     public function actionSignup()
     {
         if(Yii::$app->user->can('register-user')){
             $model = new User();
@@ -88,7 +109,8 @@ class UserController extends Controller
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
-                $model->loadDefaultValues();
+                //$model->loadDefaultValues();
+                $error = $model->getErrors();
             }
     
             return $this->render('create', [
@@ -99,6 +121,28 @@ class UserController extends Controller
         }
         
     }
+    */
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new SignupForm();
+        $authItems = AuthItem::find()->all();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Staff/User Registered Succesfully. Please advise to check their inbox for verification email.');
+            return $this->goHome();
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+            'authItems' => $authItems,
+        ]);
+    }
+
 
     /**
      * Updates an existing User model.
