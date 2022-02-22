@@ -17,8 +17,8 @@ class AssetsSearch extends Assets
     public function rules()
     {
         return [
-            [['asset_id'], 'integer'],
-            [['asset_name', 'asset_description', 'created_at'], 'safe'],
+            [['asset_id', 'asset_category', 'asset_amount'], 'integer'],
+            [['asset_name', 'date_bought', 'created_at'], 'safe'],
         ];
     }
 
@@ -59,11 +59,13 @@ class AssetsSearch extends Assets
         // grid filtering conditions
         $query->andFilterWhere([
             'asset_id' => $this->asset_id,
+            'asset_category' => $this->asset_category,
+            'asset_amount' => $this->asset_amount,
+            'date_bought' => $this->date_bought,
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'asset_name', $this->asset_name])
-            ->andFilterWhere(['like', 'asset_description', $this->asset_description]);
+        $query->andFilterWhere(['like', 'asset_name', $this->asset_name]);
 
         return $dataProvider;
     }

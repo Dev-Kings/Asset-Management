@@ -31,7 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'asset_id',
             'asset_name',
-            'asset_description',
+            'asset_category',
+            'asset_amount',
+            'date_bought',
             'created_at',
         ],
     ]) ?>

@@ -10,7 +10,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use Yii;
-
 /**
  * AssetsController implements the CRUD actions for Assets model.
  */
@@ -96,11 +95,10 @@ class AssetsController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-       }else{
-           throw new ForbiddenHttpException;
-       }
+    }else{
+            throw new ForbiddenHttpException;
+        }
     }
-
 
     /**
      * Updates an existing Assets model.

@@ -9,8 +9,13 @@ use Yii;
  *
  * @property int $asset_id
  * @property string $asset_name
- * @property string $asset_description
+ * @property int $asset_category
+ * @property int $asset_amount
+ * @property string $date_bought
  * @property string $created_at
+ *
+ * @property Category $assetCategory
+ * @property AssignAsset $assignAsset
  */
 class Assets extends \yii\db\ActiveRecord
 {
@@ -28,10 +33,11 @@ class Assets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_name', 'asset_description', 'created_at'], 'required'],
-            [['created_at'], 'safe'],
+            [['asset_name', 'asset_category', 'asset_amount', 'date_bought', 'created_at'], 'required'],
+            [['asset_category', 'asset_amount'], 'integer'],
+            [['date_bought', 'created_at'], 'safe'],
             [['asset_name'], 'string', 'max' => 50],
-            [['asset_description'], 'string', 'max' => 64],
+            [['asset_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['asset_category' => 'category_id']],
         ];
     }
 
@@ -41,10 +47,32 @@ class Assets extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'asset_id' => 'Asset Name',
+            'asset_id' => 'Asset ID',
             'asset_name' => 'Asset Name',
-            'asset_description' => 'Asset Description',
+            'asset_category' => 'Asset Category',
+            'asset_amount' => 'Asset Amount',
+            'date_bought' => 'Date Bought',
             'created_at' => 'Created At',
         ];
+    }
+
+    /**
+     * Gets query for [[AssetCategory]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssetCategory()
+    {
+        return $this->hasOne(Category::className(), ['category_id' => 'asset_category']);
+    }
+
+    /**
+     * Gets query for [[AssignAsset]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignAsset()
+    {
+        return $this->hasOne(AssignAsset::className(), ['asset_id' => 'asset_id']);
     }
 }

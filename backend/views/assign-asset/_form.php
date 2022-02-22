@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\Assets;
 use backend\models\User;
+use backend\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AssignAsset */
@@ -17,7 +18,12 @@ use backend\models\User;
 
     <?= $form->field($model, 'asset_id')->dropDownList(
         ArrayHelper::map(Assets::find()->all(), 'asset_id', 'asset_name'),
-        ['prompt' => 'Select Asset'])
+        ['prompt' => 'Select Asset Name'])
+     ?>
+
+    <?= $form->field($model, 'asset_category')->dropDownList(
+        ArrayHelper::map(Category::find()->all(), 'category_id', 'category_name'),
+        ['prompt' => 'Select Asset Category'])
      ?>
 
     <?= $form->field($model, 'user_id')->dropDownList(

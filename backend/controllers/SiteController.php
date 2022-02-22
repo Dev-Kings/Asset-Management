@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\LoginForm;
 use Yii;
+use backend\models\Assets;
+use backend\models\AssetsSearch;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -62,7 +64,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new AssetsSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        //return $this->render('/assets/index');
+        return $this->render('/assets/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

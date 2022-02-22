@@ -31,15 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //'asset_id',
             'asset.asset_name',
             //'user_id',
+            //'category.category_name',
             'user.username',
-            /*
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, AssignAsset $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \backend\models\AssignAsset $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'asset_id' => $model->asset_id]);
                  }
             ],
-            */
+            
         ],
     ]); ?>
 

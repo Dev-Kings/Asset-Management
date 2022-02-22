@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Assets', ['create'], ['class' => 'btn btn-success']) ?>
-    </p><hr>
+    </p>
+    <hr>
     <p>
         <?= Html::a('Assign Assets', ['/assign-asset/create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -31,18 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'asset_id',
+            'asset_id',
             'asset_name',
-            'asset_description',
-            'created_at',
-            /*
+            'asset_category',
+            'asset_amount',
+            'date_bought',
+            //'created_at',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Assets $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \backend\models\Assets $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'asset_id' => $model->asset_id]);
                  }
             ],
-            */
         ],
     ]); ?>
 

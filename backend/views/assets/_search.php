@@ -19,9 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'asset_name') ?>
 
-    <?= $form->field($model, 'asset_description') ?>
+    <?= $form->field($model, 'asset_category') ?>
 
-    <?= $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'asset_amount') ?>
+
+    <?= $form->field($model, 'date_bought') ?>
+
+    <?php // echo $form->field($model, 'created_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

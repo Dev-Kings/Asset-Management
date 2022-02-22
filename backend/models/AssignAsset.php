@@ -11,6 +11,7 @@ use Yii;
  * @property int $user_id
  *
  * @property Assets $asset
+ * @property Category $category
  * @property User $user
  */
 class AssignAsset extends \yii\db\ActiveRecord
@@ -29,11 +30,13 @@ class AssignAsset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_id', 'user_id'], 'required'],
-            [['asset_id', 'user_id'], 'integer'],
+            [['asset_id', 'user_id', 'asset_category'], 'required'],
+            [['asset_id', 'user_id', 'asset_category'], 'integer'],
             [['asset_id'], 'unique'],
+            [['asset_category'], 'unique'],
             [['user_id'], 'unique'],
             [['asset_id'], 'exist', 'skipOnError' => true, 'targetClass' => Assets::className(), 'targetAttribute' => ['asset_id' => 'asset_id']],
+            //[['asset_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -45,6 +48,8 @@ class AssignAsset extends \yii\db\ActiveRecord
     {
         return [
             'asset_id' => 'Asset Name',
+            //'category_id' => 'Category Name',
+            'asset_category' => 'Category',
             'user_id' => 'User Name',
         ];
     }
@@ -57,6 +62,16 @@ class AssignAsset extends \yii\db\ActiveRecord
     public function getAsset()
     {
         return $this->hasOne(Assets::className(), ['asset_id' => 'asset_id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['category_id' => 'category_id']);
     }
 
     /**
