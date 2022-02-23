@@ -69,9 +69,22 @@ class AssignAsset extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+    /*
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['category_id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['category_id' => 'category_name']);
+    }
+    */
+    
+
+    /**
+     * Gets query for [[AssetCategory]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['category_id' => 'asset_category']);
     }
 
     /**

@@ -61,7 +61,7 @@ class Assets extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAssetCategory()
+    public function getCategory()
     {
         return $this->hasOne(Category::className(), ['category_id' => 'asset_category']);
     }

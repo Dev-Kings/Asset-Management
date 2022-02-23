@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'asset_id',
             'asset.asset_name',
             //'user_id',
-            //'category.category_name',
+            'category.category_name',
             'user.username',
             [
                 'class' => ActionColumn::className(),

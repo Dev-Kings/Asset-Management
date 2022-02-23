@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'asset_id',
             'asset_name',
-            'asset_category',
+            'category.category_name',
             'asset_amount',
             'date_bought',
             //'created_at',
