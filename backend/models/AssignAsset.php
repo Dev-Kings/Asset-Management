@@ -30,11 +30,12 @@ class AssignAsset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_id', 'user_id', 'asset_category'], 'required'],
-            [['asset_id', 'user_id', 'asset_category'], 'integer'],
+            [['asset_id', 'asset_category', 'user_id', 'date_assigned'], 'required'],
+            [['asset_id', 'asset_category', 'user_id'], 'integer'],
+            [['date_assigned'], 'safe'],
             [['asset_id'], 'unique'],
             [['asset_id'], 'exist', 'skipOnError' => true, 'targetClass' => Assets::className(), 'targetAttribute' => ['asset_id' => 'asset_id']],
-            //[['asset_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'category_id']],
+            [['asset_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['asset_category' => 'category_id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -49,6 +50,7 @@ class AssignAsset extends \yii\db\ActiveRecord
             //'category_id' => 'Category Name',
             'asset_category' => 'Category',
             'user_id' => 'User Name',
+            'date_assigned' => 'Date Assigned',
         ];
     }
 

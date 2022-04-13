@@ -28,10 +28,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'category_name'], 'required'],
-            [['category_id'], 'integer'],
+            [['category_name'], 'required'],
             [['category_name'], 'string', 'max' => 50],
-            [['category_id'], 'unique'],
         ];
     }
 
@@ -41,7 +39,6 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'category_id' => 'Category ID',
             'category_name' => 'Category Name',
         ];
     }

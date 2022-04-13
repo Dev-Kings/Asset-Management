@@ -2,19 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\models\Assets;
-use backend\models\AssetsSearch;
+use backend\models\Category;
+use backend\models\CategorySearch;
 use yii\web\Controller;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
-use yii;
 
 /**
- * AssetsController implements the CRUD actions for Assets model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class AssetsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,13 +32,13 @@ class AssetsController extends Controller
     }
 
     /**
-     * Lists all Assets models.
+     * Lists all Category models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AssetsSearch();
+        $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,31 +48,30 @@ class AssetsController extends Controller
     }
 
     /**
-     * Displays a single Assets model.
-     * @param int $asset_id Asset ID
+     * Displays a single Category model.
+     * @param int $category_id
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($asset_id)
+    public function actionView($category_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($asset_id),
+            'model' => $this->findModel($category_id),
         ]);
     }
 
     /**
-     * Creates a new Assets model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        if(Yii::$app->user->can('assign-asset')){
-        $model = new Assets();
+        $model = new Category();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'asset_id' => $model->asset_id]);
+                return $this->redirect(['view', 'category_id' => $model->category_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -85,24 +81,20 @@ class AssetsController extends Controller
             'model' => $model,
         ]);
     }
-    else{
-        throw new ForbiddenHttpException;
-    }
-    }
 
     /**
-     * Updates an existing Assets model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $asset_id Asset ID
+     * @param int $category_id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($asset_id)
+    public function actionUpdate($category_id)
     {
-        $model = $this->findModel($asset_id);
+        $model = $this->findModel($category_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'asset_id' => $model->asset_id]);
+            return $this->redirect(['view', 'category_id' => $model->category_id]);
         }
 
         return $this->render('update', [
@@ -111,29 +103,29 @@ class AssetsController extends Controller
     }
 
     /**
-     * Deletes an existing Assets model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $asset_id Asset ID
+     * @param int $category_id
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($asset_id)
+    public function actionDelete($category_id)
     {
-        $this->findModel($asset_id)->delete();
+        $this->findModel($category_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Assets model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $asset_id Asset ID
-     * @return Assets the loaded model
+     * @param int $category_id
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($asset_id)
+    protected function findModel($category_id)
     {
-        if (($model = Assets::findOne(['asset_id' => $asset_id])) !== null) {
+        if (($model = Category::findOne(['category_id' => $category_id])) !== null) {
             return $model;
         }
 

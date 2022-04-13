@@ -19,10 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Assets', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <hr>
-    <p>
-        <?= Html::a('Assign Assets', ['/assign-asset/create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -32,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'asset_id',
+            //'asset_id',
             'asset_name',
+            //'asset_category',
             'category.category_name',
-            'asset_amount',
-            'date_bought',
-            //'created_at',
+            'asset_description',
+            'date_assigned',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, \backend\models\Assets $model, $key, $index, $column) {

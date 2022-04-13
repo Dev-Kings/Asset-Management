@@ -16,6 +16,8 @@ use dosamigos\datepicker\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php //$form->field($model, 'asset_id')->textInput() ?>
+
     <?= $form->field($model, 'asset_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'asset_category')->dropDownList(
@@ -23,9 +25,9 @@ use dosamigos\datepicker\DatePicker;
         ['prompt' => 'Select Asset Category'])
      ?>
 
-    <?= $form->field($model, 'asset_amount')->textInput() ?>
+    <?= $form->field($model, 'asset_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date_bought')->widget(
+    <?= $form->field($model, 'date_assigned')->widget(
         DatePicker::className(), [
             // inline too, not bad
             'inline' => false, 
@@ -34,12 +36,10 @@ use dosamigos\datepicker\DatePicker;
             'clientOptions' => [
                 'autoclose' => true,
                 'format' => 'yyyy-m-d',
+                'todayHighlight' => true,
                 'endDate' => "0d"
             ]
     ]);?>
-
-    <?php //$form->field($model, 'created_at')->textInput() 
-    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

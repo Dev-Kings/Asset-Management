@@ -10,12 +10,11 @@ use Yii;
  * @property int $asset_id
  * @property string $asset_name
  * @property int $asset_category
- * @property int $asset_amount
- * @property string $date_bought
+ * @property string $asset_description
+ * @property string $date_assigned
  * @property string $created_at
  *
  * @property Category $assetCategory
- * @property AssignAsset $assignAsset
  */
 class Assets extends \yii\db\ActiveRecord
 {
@@ -33,10 +32,12 @@ class Assets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['asset_name', 'asset_category', 'asset_amount', 'date_bought', 'created_at'], 'required'],
-            [['asset_category', 'asset_amount'], 'integer'],
-            [['date_bought', 'created_at'], 'safe'],
+            [['asset_name', 'asset_category', 'asset_description', 'date_assigned'], 'required'],
+            [['asset_id', 'asset_category'], 'integer'],
+            [['date_assigned'], 'safe'],
             [['asset_name'], 'string', 'max' => 50],
+            [['asset_description'], 'string', 'max' => 200],
+            [['asset_id'], 'unique'],
             [['asset_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['asset_category' => 'category_id']],
         ];
     }
@@ -50,9 +51,10 @@ class Assets extends \yii\db\ActiveRecord
             'asset_id' => 'Asset ID',
             'asset_name' => 'Asset Name',
             'asset_category' => 'Asset Category',
-            'asset_amount' => 'Asset Amount',
-            'date_bought' => 'Date Bought',
-            'created_at' => 'Created At',
+            //'category.category_name' => 'Asset Category',
+            'asset_description' => 'Asset Description',
+            'date_assigned' => 'Date Assigned',
+            //'created_at' => 'Created At',
         ];
     }
 
@@ -64,15 +66,5 @@ class Assets extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['category_id' => 'asset_category']);
-    }
-
-    /**
-     * Gets query for [[AssignAsset]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAssignAsset()
-    {
-        return $this->hasOne(AssignAsset::className(), ['asset_id' => 'asset_id']);
     }
 }

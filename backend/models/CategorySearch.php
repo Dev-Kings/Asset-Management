@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Assets;
+use backend\models\Category;
 
 /**
- * AssetsSearch represents the model behind the search form of `backend\models\Assets`.
+ * CategorySearch represents the model behind the search form of `backend\models\Category`.
  */
-class AssetsSearch extends Assets
+class CategorySearch extends Category
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class AssetsSearch extends Assets
     public function rules()
     {
         return [
-            [['asset_id', 'asset_category'], 'integer'],
-            [['asset_name', 'asset_description', 'date_assigned'], 'safe'],
+            [['category_id'], 'integer'],
+            [['category_name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AssetsSearch extends Assets
      */
     public function search($params)
     {
-        $query = Assets::find();
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -58,14 +58,10 @@ class AssetsSearch extends Assets
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'asset_id' => $this->asset_id,
-            'asset_category' => $this->asset_category,
-            'date_assigned' => $this->date_assigned,
-            //'created_at' => $this->created_at,
+            'category_id' => $this->category_id,
         ]);
 
-        $query->andFilterWhere(['like', 'asset_name', $this->asset_name])
-            ->andFilterWhere(['like', 'asset_description', $this->asset_description]);
+        $query->andFilterWhere(['like', 'category_name', $this->category_name]);
 
         return $dataProvider;
     }

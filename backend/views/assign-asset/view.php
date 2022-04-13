@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'asset.asset_name',
             'user.username',
+            'date_assigned',
         ],
     ]) ?>
 

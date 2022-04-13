@@ -21,9 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'asset_category') ?>
 
-    <?= $form->field($model, 'asset_amount') ?>
+    <?= $form->field($model, 'asset_description') ?>
 
-    <?= $form->field($model, 'date_bought') ?>
+    <?= $form->field($model, 'date_assigned') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

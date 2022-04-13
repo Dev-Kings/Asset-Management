@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\AssignAssetSearch */
+/* @var $searchModel backend\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Assign Assets';
+$this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="assign-asset-index">
+<div class="category-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Assign Asset', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,19 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'asset_id',
-            'asset.asset_name',
-            //'user_id',
-            'category.category_name',
-            'user.username',
-            'date_assigned',
+            //'category_id',
+            'category_name',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \backend\models\AssignAsset $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'asset_id' => $model->asset_id]);
+                'urlCreator' => function ($action, \backend\models\Category $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'category_id' => $model->category_id]);
                  }
             ],
-            
         ],
     ]); ?>
 

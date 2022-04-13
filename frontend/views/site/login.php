@@ -10,13 +10,15 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-login" margin: auto;>
+    
 
-    <p>Please fill out the following fields to login:</p>
+    <div class="site-login">
+        <div class="mt-5 offset-lg-3 col-lg-6">
 
-    <div class="row">
-        <div class="col-lg-5">
+            <h1><?= Html::encode($this->title) ?></h1>
+            <p>Please fill out the following fields to login:</p>
+
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>

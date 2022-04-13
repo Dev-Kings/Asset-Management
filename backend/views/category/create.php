@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\AssignAsset */
+/* @var $model backend\models\Category */
 
-$this->title = 'Assign Asset';
-$this->params['breadcrumbs'][] = ['label' => 'Assign Assets', 'url' => ['index']];
+$this->title = 'Create Category';
+$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="assign-asset-create">
+<div class="category-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
